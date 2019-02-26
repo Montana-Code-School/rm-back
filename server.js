@@ -5,13 +5,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
+const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/speeches'
 
 const { Speech } = require('./models');
 const { createSpeech, getSpeech } = require('./routeHandlers')
 
 
-mongoose.connect('mongodb://localhost/speeches', {useNewUrlParser: true});
+mongoose.connect(dbURI, {useNewUrlParser: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'))
