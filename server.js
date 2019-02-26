@@ -21,7 +21,7 @@ db.once('open', onDBConnected)
 function onDBConnected(){
   console.log('we are connected to mongo db')
 }
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', getSpeech );
 app.post('/', createSpeech);
