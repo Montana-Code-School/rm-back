@@ -33,6 +33,7 @@ if(process.env.NODE_ENV === "production"){
 }
 
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
 app.get('/', getSpeech );
 app.post('/', createSpeech);
 
