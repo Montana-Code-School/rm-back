@@ -75,16 +75,16 @@ it('should update a speech', function(){
       title: "updatedTitle",
       content: "this my updated content",
     }
-  }
+  };
   let expectedResult = {
     _id: ID,
     title: "updatedTitle",
     content: "this my updated content",
-  }
+  };
   sandbox.stub(Speech, 'findByIdAndUpdate').yields(null, expectedResult);
   updateSpeech(req, res);
   sinon.assert.calledWith(Speech.findByIdAndUpdate, req.body._id, {title: req.body.title, content: req.body.content}, {new: true} );
-  sinon.assert.calledWith(res.status, sinon.match(200))
+  sinon.assert.calledWith(res.status, sinon.match(200));
 })
 
 

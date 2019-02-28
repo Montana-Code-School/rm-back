@@ -5,10 +5,10 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3001;
-const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/speeches'
+const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/speeches' ;
 
 const { Speech } = require('./models');
-const { createSpeech, getSpeech, updateSpeech } = require('./routeHandlers')
+const { createSpeech, getSpeech, updateSpeech } = require('./routeHandlers');
 
 
 mongoose.connect(dbURI, {useNewUrlParser: true});

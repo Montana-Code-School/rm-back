@@ -16,10 +16,10 @@ module.exports = {
   },
 
   updateSpeech(req, res){
-    const { title, content, _id} = req.body;
+    const { title, content, _id } = req.body;
     Speech.findByIdAndUpdate(_id, {title, content}, {new: true}, function(err, updatedSpeech){
       if (err) return res.status(400).json(err);
       res.status(200).json(updatedSpeech);
-    })
+    });
   }
 };
