@@ -5,10 +5,10 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3001;
-const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/speeches'
+const dbURI = process.env.MONGODB_URI || 'mongodb://localhost/speeches' ;
 
 const { Speech } = require('./models');
-const { createSpeech, getSpeech } = require('./routeHandlers')
+const { createSpeech, getSpeech, updateSpeech } = require('./routeHandlers');
 
 
 mongoose.connect(dbURI, {useNewUrlParser: true});
@@ -36,6 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.get('/', getSpeech );
 app.post('/', createSpeech);
+app.put('/', updateSpeech);
 
 app.listen(port, function(){
   console.log('we are running on ' + port);
