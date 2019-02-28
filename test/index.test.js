@@ -2,7 +2,11 @@ const mocha = require('mocha');
 const sinon = require('sinon');
 const mongoose = require('mongoose');
 
-const { createSpeech, getSpeech} = require('../routeHandlers')
+const {
+  createSpeech,
+  getSpeech,
+  updateSpeech
+} = require('../routeHandlers');
 const { Speech } = require('../models');
 
 let res = {};
@@ -60,6 +64,26 @@ it('should get all the speeches', function(){
   ]
   sandbox.stub(Speech, 'find').yields(null, expectedResult);
   getSpeech(req, res);
+  sinon.assert.calledWith(res.status, sinon.match(200))
+})
+
+it('should update a speech', function(){
+  const ID = new mongoose.Types.ObjectId();
+  let req = {
+    body: {
+      _id: ID,
+      title: "updatedTitle",
+      content: "this my updated content",
+    }
+  }
+  let expectedResult = {
+    _id: ID,
+    title: "updatedTitle",
+    content: "this my updated content",
+  }
+  sandbox.stub(Speech, 'findByIdAndUpdate').yields(null, expectedResult);
+  updateSpeech(req, res);
+  sinon.assert.calledWith(Speech.findByIdAndUpdate, req.body._id, {title: req.body.title, content: req.body.content}, {new: true} );
   sinon.assert.calledWith(res.status, sinon.match(200))
 })
 
